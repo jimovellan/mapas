@@ -1,30 +1,30 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  
+  <LoadingComponent v-if="state$$.isLoading"/>
+  <NavList></NavList>
   <router-view/>
 </template>
 
+<script setup>
+
+import { onBeforeMount,provide } from 'vue';
+import useAppState from './views/app.state';
+import NavList from './components/NavList.vue';
+import LoadingComponent from './components/LoadingComponent.vue';
+
+const state$$ = useAppState();
+
+
+onBeforeMount( async()=>{
+  await state$$.loadRegions();
+})
+
+provide('app-state',state$$);
+
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>

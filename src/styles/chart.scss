@@ -1,0 +1,15 @@
+.app-chart__container{
+    position: relative;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2em;
+    :deep(canvas){
+      box-sizing: border-box;
+      width: 100% !important;
+      height: 100% !important;
+    }
+}
